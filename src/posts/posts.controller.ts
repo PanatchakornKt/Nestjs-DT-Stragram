@@ -10,6 +10,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { CreatePostsDto } from './dto/create-posts-dto';
+import { ChangeStringCasePipe } from '../pipe/change-string-case.pipe';
 
 @Controller('posts')
 export class PostsController {
@@ -17,8 +18,10 @@ export class PostsController {
   getPosts() {
     return 'katang';
   }
+
   @Post()
   @UsePipes(ValidationPipe)
+  @UsePipes(new ChangeStringCasePipe())
   addPosts(@Body() createPostsDto: CreatePostsDto) {
     const { post_text } = createPostsDto;
     console.log(`${post_text}`);

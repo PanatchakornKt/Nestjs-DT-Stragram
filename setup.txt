@@ -1,1 +1,3 @@
 npm add class-transformer class-validator
+
+npm i change-case
