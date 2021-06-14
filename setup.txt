@@ -2,3 +2,5 @@ npm add class-transformer class-validator
 npm i change-case
 
 npm add rxjs @nestjs/typeorm pg
+
+npm add multer fs-extra
