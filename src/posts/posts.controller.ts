@@ -10,13 +10,19 @@ import {
   Patch,
 } from '@nestjs/common';
 import { CreatePostsDto } from './dto/create-posts-dto';
+import { Posts } from './posts.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 //import { ChangeStringCasePipe } from '../pipe/change-string-case.pipe';
+import { PostsRepository } from './posts.repository';
 
 @Controller('posts')
 export class PostsController {
+  constructor(
+    @InjectRepository(PostsRepository) private postsRepository: PostsRepository,
+  ) {}
   @Get()
   getPosts() {
-    return 'katang';
+    return this.postsRepository.find();
   }
 
   @Post()
@@ -25,6 +31,10 @@ export class PostsController {
   addPosts(@Body() createPostsDto: CreatePostsDto) {
     const { post_text } = createPostsDto;
     console.log(`${post_text}`);
+
+    const posts = new Posts();
+    posts.post_text = post_text;
+    posts.save();
   }
 
   @Get('/:post_id')
