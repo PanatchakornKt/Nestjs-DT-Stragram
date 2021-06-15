@@ -22,5 +22,6 @@ export class UsersController {
   @Post('/signin')
   signIn(@Body() usersCredentailDto: UsersCredentailDto) {
     console.log(usersCredentailDto);
+    return this.usersService.signIn(usersCredentailDto);
   }
 }

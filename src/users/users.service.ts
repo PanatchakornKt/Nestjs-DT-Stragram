@@ -13,4 +13,8 @@ export class UsersService {
   signUp(usersCredentailDto: UsersCredentailDto) {
     return this.usersRepository.createUsers(usersCredentailDto);
   }
+
+  signIn(usersCredentailDto: UsersCredentailDto) {
+    return this.usersRepository.verifyUserPassword(usersCredentailDto);
+  }
 }

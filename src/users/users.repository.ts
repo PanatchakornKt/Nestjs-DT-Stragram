@@ -5,15 +5,19 @@ import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 @EntityRepository(Users)
 export class UsersRepository extends Repository<Users> {
   async createUsers(usersCredentailDto: UsersCredentailDto) {
     const { username, password } = usersCredentailDto;
+    const salt = bcrypt.genSaltSync();
 
     const users = new Users();
     users.username = username;
-    users.password = password;
+    users.salt = salt;
+    users.password = await this.hushPassword(password, salt);
+
     try {
       await users.save();
     } catch (error) {
@@ -27,5 +31,19 @@ export class UsersRepository extends Repository<Users> {
       }
     }
     return users;
+  }
+
+  async verifyUserPassword(usersCredentailDto: UsersCredentailDto) {
+    const { username, password } = usersCredentailDto;
+    const user = await this.findOne({ username: username });
+    if (user && (await user.verifyPassword(password))) {
+      return user.username;
+    } else {
+      return 'invalid username';
+    }
+  }
+
+  async hushPassword(password: string, salt: string) {
+    return bcrypt.hash(password, salt);
   }
 }
