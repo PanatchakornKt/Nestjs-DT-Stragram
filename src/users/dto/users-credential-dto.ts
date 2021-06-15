@@ -18,7 +18,7 @@ export class UsersCredentailDto {
   @MinLength(8)
   @MaxLength(20)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, {
-    message: 'password too weak.',
+    message: 'password is not strong enough.',
   })
   password: string;
 }
