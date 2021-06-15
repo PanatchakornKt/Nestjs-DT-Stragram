@@ -41,21 +41,23 @@ export class CommentsController {
 
   @Get('/:comment_id')
   getCommentsById(@Param() comment_id: number) {
-    return `Id is ${comment_id}`;
+    return this.commentsService.getCommentsById(comment_id);
   }
 
   @Delete('/:comment_id')
   deleteCommentsById(@Param() comment_id: number) {
-    return `Dalete is ${comment_id}`;
+    return this.commentsService.deleteComments(comment_id);
   }
 
   @Patch('/:comment_id')
-  updateCommentsById(
+  async updateCommentsById(
     @Param() comment_id: number,
     @Body() createCommentDto: CreateCommentDto,
   ) {
+    const comment = await this.getCommentsById(comment_id);
     const { comment_text } = createCommentDto;
-    console.log(`${comment_text}`);
-    return `Update is ${comment_id}, ${comment_text}`;
+    comment.comment_text = comment_text;
+    await comment.save();
+    return comment;
   }
 }
