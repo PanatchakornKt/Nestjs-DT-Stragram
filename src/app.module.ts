@@ -7,10 +7,12 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 // import { MulterModule } from '@nestjs/platform-express/multer';
 // import { LoggerMiddleware } from './logger.middleware';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
     PostsModule,
+    CommentsModule,
     TypeOrmModule.forRoot(typeOrmConfig),
     UsersModule,
     // MulterModule.register[
