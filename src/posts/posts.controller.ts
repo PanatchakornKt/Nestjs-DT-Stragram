@@ -30,14 +30,12 @@ export class PostsController {
     return this.postsService.getPostsTxt();
   }
 
-  //   @Post()
-  //   @UsePipes(ValidationPipe)
-  //   //@UsePipes(new ChangeStringCasePipe())
-  //   addPosts(@Body() createPostsDto: CreatePostsDto) {
-  //     return this.postsService.createPosts(createPostsDto);
-  //   }
+  // @Post()
+  // @UsePipes(ValidationPipe)
+  // addPosts(@Body() createPostsDto: CreatePostsDto) {
+  //   return this.postsService.createPosts(createPostsDto);
+  // }
 
-  @Post()
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
