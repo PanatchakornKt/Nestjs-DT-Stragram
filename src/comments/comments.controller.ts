@@ -20,15 +20,15 @@ export class CommentsController {
   //   return this.commentsService.getComments();
   // }
 
+  @Get('/:comment_id')
+  getCommentsById(@Param() comment_id: number) {
+    return this.commentsService.getCommentsById(comment_id);
+  }
+
   @Post()
   @UsePipes(ValidationPipe)
   addComments(@Body() createCommentDto: CreateCommentDto) {
     return this.commentsService.createComments(createCommentDto);
-  }
-
-  @Get('/:comment_id')
-  getCommentsById(@Param() comment_id: number) {
-    return this.commentsService.getCommentsById(comment_id);
   }
 
   @Delete('/:comment_id')
