@@ -12,6 +12,9 @@ export class Comments extends BaseEntity {
   comment_id: number;
 
   @Column()
+  post_id: number;
+
+  @Column()
   comment_text: string;
 
   @UpdateDateColumn()

@@ -39,7 +39,7 @@ export class UsersRepository extends Repository<Users> {
     if (user && (await user.verifyPassword(password))) {
       return user.username;
     } else {
-      return 'invalid username or password';
+      return null;
     }
   }
 

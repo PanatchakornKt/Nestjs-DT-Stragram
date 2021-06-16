@@ -12,6 +12,9 @@ export class Posts extends BaseEntity {
   post_id: number;
 
   @Column()
+  user_id: number;
+
+  @Column()
   post_text: string;
 
   @Column({ default: 'noImage.jpeg' })

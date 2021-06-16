@@ -6,4 +6,6 @@ export class CreatePostsDto {
     message: 'the text is too long.',
   })
   post_text: string;
+
+  user_id: number;
 }
