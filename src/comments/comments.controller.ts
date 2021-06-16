@@ -1,4 +1,3 @@
-//import { Comments } from './comments.entity';
 import {
   Controller,
   Get,
@@ -11,27 +10,15 @@ import {
   Patch,
 } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comments-dto';
-// import { CommentsRepository } from './comments.repository';
-// import { InjectRepository } from '@nestjs/typeorm';
 import { CommentsService } from './comments.service';
 
 @Controller('comments')
 export class CommentsController {
-  //   constructor(
-  //     @InjectRepository(CommentsRepository)
-  //     private commentsRepository: CommentsRepository,
-  //   ) {}
   constructor(private commentsService: CommentsService) {}
-  @Get()
-  getComments() {
-    // return this.commentsRepository.find();
-    return this.commentsService.getComments();
-  }
-
-  //   @Post()
-  //   addComments(@Body('comment_text') comment_text: string) {
-  //     console.log(`${comment_text}`);
-  //   }
+  // @Get()
+  // getComments() {
+  //   return this.commentsService.getComments();
+  // }
 
   @Post()
   @UsePipes(ValidationPipe)
