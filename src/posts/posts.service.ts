@@ -35,9 +35,8 @@ export class PostsService {
 
   async updatePosts(post_id: number, createPostsDto: CreatePostsDto) {
     const post = await this.getPostsById(post_id);
-    const { post_text, user_id } = createPostsDto;
+    const { post_text } = createPostsDto;
     post.post_text = post_text;
-    post.user_id = user_id;
     await post.save();
     return post;
   }

@@ -7,5 +7,5 @@ export class CreatePostsDto {
   })
   post_text: string;
 
-  user_id: number;
+  userId: number;
 }
