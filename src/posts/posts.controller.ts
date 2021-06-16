@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -10,6 +11,7 @@ import {
   Patch,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreatePostsDto } from './dto/create-posts-dto';
@@ -19,12 +21,13 @@ import { extname } from 'path';
 import { diskStorage } from 'multer';
 
 @Controller('posts')
+@UseGuards(AuthGuard())
 export class PostsController {
   constructor(private postsService: PostsService) {}
-  // @Get()
-  // getPost() {
-  //   return this.postsService.getPostsTxt();
-  // }
+  @Get()
+  getPost() {
+    return this.postsService.getPostsTxt();
+  }
 
   @Get('/:post_id')
   getPostsById(@Param('post_id') post_id: number) {

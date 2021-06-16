@@ -6,15 +6,19 @@ import {
   Param,
   UsePipes,
   ValidationPipe,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersCredentailDto } from './dto/users-credential-dto';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUsername } from './get-username-decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Get('/:user_id')
+  @Get('/admin/:user_id')
   getCommentsById(@Param() user_id: number) {
     return this.usersService.getUsersById(user_id);
   }
@@ -30,5 +34,12 @@ export class UsersController {
   signIn(@Body() usersCredentailDto: UsersCredentailDto) {
     console.log(usersCredentailDto);
     return this.usersService.signIn(usersCredentailDto);
+  }
+
+  @Get('/test')
+  @UseGuards(AuthGuard())
+  test(@Req() req, @GetUsername() username) {
+    // console.log(req);
+    return username;
   }
 }

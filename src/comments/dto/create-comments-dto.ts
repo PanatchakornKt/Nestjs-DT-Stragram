@@ -6,4 +6,6 @@ export class CreateCommentDto {
     message: 'the text is too long.',
   })
   comment_text: string;
+
+  post_id: number;
 }

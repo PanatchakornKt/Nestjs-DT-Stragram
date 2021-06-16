@@ -42,8 +42,9 @@ export class CommentsController {
     @Body() createCommentDto: CreateCommentDto,
   ) {
     const comment = await this.getCommentsById(comment_id);
-    const { comment_text } = createCommentDto;
+    const { comment_text, post_id } = createCommentDto;
     comment.comment_text = comment_text;
+    comment.post_id = post_id;
     await comment.save();
     return comment;
   }

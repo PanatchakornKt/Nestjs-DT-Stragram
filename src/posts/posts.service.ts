@@ -14,9 +14,9 @@ export class PostsService {
     return await this.postsRepository.createPosts(createPostsDto);
   }
 
-  // async getPostsTxt() {
-  //   return await this.postsRepository.find();
-  // }
+  async getPostsTxt() {
+    return await this.postsRepository.find();
+  }
 
   async getPostsById(post_id: number) {
     const found = await this.postsRepository.findOne(post_id);
@@ -35,8 +35,9 @@ export class PostsService {
 
   async updatePosts(post_id: number, createPostsDto: CreatePostsDto) {
     const post = await this.getPostsById(post_id);
-    const { post_text } = createPostsDto;
+    const { post_text, user_id } = createPostsDto;
     post.post_text = post_text;
+    post.user_id = user_id;
     await post.save();
     return post;
   }
