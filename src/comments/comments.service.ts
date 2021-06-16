@@ -14,9 +14,9 @@ export class CommentsService {
     return this.commentsRepository.createComments(createCommentDto);
   }
 
-  getComments() {
-    return this.commentsRepository.find();
-  }
+  // getComments() {
+  //   return this.commentsRepository.find();
+  // }
 
   async getCommentsById(comment_id: number) {
     const found = await this.commentsRepository.findOne(comment_id);
