@@ -18,9 +18,14 @@ import { GetUsername } from './get-username-decorator';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Get('/admin/:user_id')
-  getCommentsById(@Param() user_id: number) {
-    return this.usersService.getUsersById(user_id);
+  @Get('/admin/:id')
+  getUsersById(@Param() id: number) {
+    return this.usersService.getUsersById(id);
+  }
+
+  @Get('/login/posts/:id')
+  getUsersPostsById(@Param() id: number) {
+    return this.usersService.getUsersPostsById(id);
   }
 
   @Post('/signup')
@@ -39,7 +44,6 @@ export class UsersController {
   @Get('/test')
   @UseGuards(AuthGuard())
   test(@Req() req, @GetUsername() username) {
-    // console.log(req);
     return username;
   }
 }

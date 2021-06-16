@@ -15,12 +15,22 @@ export class UsersService {
     private jwtService: JwtService,
   ) {}
 
-  async getUsersById(user_id: number) {
-    const found = await this.usersRepository.findOne(user_id);
+  async getUsersById(id: number) {
+    const found = await this.usersRepository.findOne(id);
     if (!found) {
-      throw new NotFoundException(`User ${user_id} is not found`);
+      throw new NotFoundException(`User ${id} is not found`);
     }
     return found;
+  }
+
+  async getUsersPostsById(id: number) {
+    console.log('test');
+    const found = await this.usersRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException(`User ${id} is not found`);
+    }
+    return found;
+    console.log(found);
   }
 
   signUp(usersCredentailDto: UsersCredentailDto) {

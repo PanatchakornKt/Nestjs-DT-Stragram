@@ -1,3 +1,4 @@
+import { Posts } from './../posts/posts.entity';
 import {
   BaseEntity,
   Entity,
@@ -6,12 +7,13 @@ import {
   Unique,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
 @Unique(['username'])
 export class Users extends BaseEntity {
   @PrimaryGeneratedColumn()
-  user_id: number;
+  id: number;
 
   @Column()
   username: string;
@@ -21,6 +23,9 @@ export class Users extends BaseEntity {
 
   @Column()
   salt: string;
+
+  @OneToMany((type) => Posts, (post) => post.user, { eager: true })
+  posts: Posts;
 
   async verifyPassword(password) {
     const hashPassword = await bcrypt.hash(password, this.salt);

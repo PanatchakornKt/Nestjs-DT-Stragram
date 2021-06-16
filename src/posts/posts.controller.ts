@@ -53,7 +53,7 @@ export class PostsController {
   @UsePipes(ValidationPipe)
   async addPosts(@UploadedFile() file, @Body() createPostsDto: CreatePostsDto) {
     const posts = await this.postsService.createPosts(createPostsDto);
-    const imageFile = posts.post_id + extname(file.filename);
+    const imageFile = posts.id + extname(file.filename);
     fsExtra.move(file.path, `upload/${imageFile}`);
     posts.post_img = imageFile;
     await posts.save();
